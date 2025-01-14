@@ -113,7 +113,7 @@ class ProjectAgent:
     torch.save(self.model.state_dict(), self.path)
     return
 
-  def load(self, path="model_dan.pth"):
+  def load(self):
     self.path = os.getcwd() + "/model_dan.pth"
     self.model.load_state_dict(torch.load(self.path, map_location=self.device))
     self.model.eval()
