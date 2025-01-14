@@ -109,14 +109,14 @@ class ProjectAgent:
     else:
       return self.greedy_action(self.model, observation)
 
-  def save(self): 
-    self.path = "model_dan.pth"
+  def save(self, path="model_dan.pth"):
+    self.path = path
     torch.save(self.model.state_dict(), self.path)
     return
 
-  def load(self): 
-    self.path = "model_dan.pth"
-    self.model.load_state_dict(torch.load(self.path, map_location=self.device)) 
+  def load(self, path="model_dan.pth"):
+    self.path = path
+    self.model.load_state_dict(torch.load(self.path, map_location=self.device))
     self.model.eval()
     return
 
