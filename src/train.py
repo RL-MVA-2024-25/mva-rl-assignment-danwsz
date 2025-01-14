@@ -18,7 +18,6 @@ env = TimeLimit(
 # Don't modify the methods names and signatures, but you can add methods.
 # ENJOY! 
 
-###########################################################################
 
 # We define our configuration
 
@@ -109,13 +108,14 @@ class ProjectAgent:
     else:
       return self.greedy_action(self.model, observation)
 
-  def save(self, path="model_dan.pth"):
-    self.path = path
+  def save(self, path):
+    self.path = path + "/model_dan.pth"
     torch.save(self.model.state_dict(), self.path)
     return
 
   def load(self, path="model_dan.pth"):
-    self.path = path
+    self.path = os.getcwd() + "/model_dan.pth"
+    self.model = self.model({}, self.device)
     self.model.load_state_dict(torch.load(self.path, map_location=self.device))
     self.model.eval()
     return
@@ -179,7 +179,8 @@ class ProjectAgent:
       else:
         state = next_state
     self.model.load_state_dict(self.best_model.state_dict())
-    self.save()
+    path = os.getcwd()
+    self.save(path)
     return episode_return
 
 
